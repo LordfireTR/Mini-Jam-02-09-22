@@ -14,13 +14,21 @@ public class BulletBehaviour : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+        MovementHandler();
+        DurationHandler();
+    }
 
+    void MovementHandler()
+    {
+        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+    }
+    
+    void DurationHandler()
+    {
         if (bulletAge >= bulletDuration)
         {
             Destroy(gameObject);
         }
-
         bulletAge += Time.deltaTime;
     }
 }
