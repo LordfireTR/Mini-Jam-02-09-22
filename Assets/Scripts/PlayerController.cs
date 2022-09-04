@@ -16,12 +16,15 @@ public class PlayerController : MonoBehaviour
     float gunCooldown;
 
     //Handle Special Attacks
-    [SerializeField] GameObject gammaRay;
+    [SerializeField] GameObject deathRay;
+    [SerializeField] float _rayCooldown, _rayDuration;
+    float rayCooldown, rayDuration;
 
     void Update()
     {
         AimHandler();
         GunHandler();
+        RayHandler();
     }
 
     void AimHandler()
@@ -41,6 +44,32 @@ public class PlayerController : MonoBehaviour
         else if(gunCooldown > 0)
         {
             gunCooldown -= Time.deltaTime;
+        }
+    }
+
+    void RayHandler()
+    {
+        
+        if(rayCooldown <= 0)
+        {
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                deathRay.SetActive(true);
+                rayCooldown = _rayCooldown;
+                rayDuration = _rayDuration;
+            }
+        }
+        else
+        {
+            if(rayDuration <= 0)
+            {
+                deathRay.SetActive(false);
+                rayCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                rayDuration -= Time.deltaTime;
+            }
         }
     }
 }

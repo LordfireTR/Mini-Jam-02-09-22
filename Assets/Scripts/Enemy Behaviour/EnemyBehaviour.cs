@@ -5,14 +5,16 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public float enemyHealth, enemySpeed;
-    [SerializeField] Transform player;
+
+    public virtual void Begin()
+    {
+        enemyHealth = 20.0f;
+        enemySpeed = 5.0f;
+    }
 
     public virtual void DeathHandler()
     {
-        if(enemyHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     public virtual void DamageRecieved(float damagePoint)
@@ -22,7 +24,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     public virtual void Movement()
     {
-        transform.LookAt(player);
         transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
     }
 }

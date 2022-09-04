@@ -21,7 +21,7 @@ public class EnemyStateManager : MonoBehaviour
 
     // void OnTriggerEnter(Collider other)
     // {
-
+    //     currentState.OnTriggerEnterState(this, other);
     // }
 
     public void SwitchState(Base state)

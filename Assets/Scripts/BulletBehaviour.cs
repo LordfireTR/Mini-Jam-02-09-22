@@ -6,6 +6,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] float bulletSpeed, bulletDuration;
     float bulletAge;
+    float bulletDamage = 5.0f;
 
     void Start()
     {
@@ -30,5 +31,14 @@ public class BulletBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
         bulletAge += Time.deltaTime;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyBehaviour>().DamageRecieved(bulletDamage);
+            Destroy(gameObject);
+        }
     }
 }
