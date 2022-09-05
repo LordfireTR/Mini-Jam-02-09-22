@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State1 : State0
+public class State3 : State0
 {
     SpawnManager SpawnManager;
 
     public override void EnterState(SpawnStateManager spawnManager)
     {
-        Debug.Log("state1");
+        Debug.Log("state3");
         SpawnManager = spawnManager.GetComponent<SpawnManager>();
-        SpawnManager.SpawnStart();
+        SpawnManager.SpawnContinue();
     }
 
     public override void UpdateState(SpawnStateManager spawnManager)

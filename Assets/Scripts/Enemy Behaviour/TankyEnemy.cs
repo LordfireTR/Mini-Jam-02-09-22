@@ -7,6 +7,7 @@ public class TankyEnemy : EnemyBehaviour
     public override void Begin()
     {
         base.Begin();
-        enemyHealth *= 1.5f;
+        enemyMaxHealth *= 1.5f;
+        enemyHealth = enemyMaxHealth;
     }
 }

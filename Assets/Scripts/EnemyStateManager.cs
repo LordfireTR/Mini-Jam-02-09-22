@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyStateManager : MonoBehaviour
 {
     public EnemySimple EnemySimple = new EnemySimple();
-    //public EnemyIdle IdleState = new EnemyIdle();
+    public EnemyChannel EnemyChannel = new EnemyChannel();
+    public EnemyCharge EnemyCharge = new EnemyCharge();
+    
     
     public Base currentState;
     void Start()
@@ -18,11 +20,6 @@ public class EnemyStateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
     }
-
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     currentState.OnTriggerEnterState(this, other);
-    // }
 
     public void SwitchState(Base state)
     {

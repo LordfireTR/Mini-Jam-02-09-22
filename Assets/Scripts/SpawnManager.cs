@@ -6,19 +6,32 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] int xLimit, zSpawn;
-    float spawnPeriod, _spawnPeriod;
+    float spawnPeriod, _spawnPeriod, stagePeriod, _stagePeriod = 20.0f;
+    int stageNum, enemyTypes;
+    public int bossCount;
 
-    void Start()
+    public void SpawnStart()
     {
         spawnPeriod = 2.0f;
         _spawnPeriod = 4.0f;
+        stageNum = 0;
+        bossCount = 0;
     }
 
-    void Update()
+    public void SpawnContinue()
+    {
+        spawnPeriod = _spawnPeriod;
+        stageNum++;
+    }
+
+    public void SpawnEnemy()
     {
         if (spawnPeriod <= 0)
         {
-            SpawnEnemy();
+            int index = Random.Range(0, enemyTypes);
+            Debug.Log(stageNum + " " + enemyTypes + " " + index);
+    
+            Instantiate(enemyPrefabs[index], SpawnPos(), Quaternion.Euler(0, 180, 0));
             spawnPeriod = _spawnPeriod;
         }
         else
@@ -27,11 +40,10 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    void SpawnEnemy()
+    public void SpawnEnemy(int index)
     {
-        int index = Random.Range(0, enemyPrefabs.Length);
-
-        Instantiate(enemyPrefabs[index], SpawnPos(), Quaternion.Euler(0, 180, 0));
+        Instantiate(enemyPrefabs[index], SpawnPos(), Quaternion.Euler(0, 180, 0), gameObject.transform);
+        spawnPeriod = 2*_spawnPeriod;
     }
 
     Vector3 SpawnPos()
@@ -39,5 +51,65 @@ public class SpawnManager : MonoBehaviour
         int xSpawn = Random.Range(-xLimit, xLimit + 1);
         Vector3 spawnPos = new Vector3(xSpawn, 1, zSpawn);
         return spawnPos;
+    }
+
+    bool NextStageBool()
+    {
+        if (stagePeriod >= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void NextStage()
+    {
+        if (!NextStageBool())
+        {
+            stagePeriod -= Time.deltaTime;
+        }
+        else
+        {
+            _spawnPeriod *= 0.8f;
+            stagePeriod = _stagePeriod;
+            stageNum++;
+        }
+
+        if (stageNum < 3)
+        {
+            enemyTypes = 1;
+        }
+        else if (stageNum == 3)
+        {
+            enemyTypes = 2;
+        }
+        else if (stageNum == 4)
+        {
+            enemyTypes = 3;
+        }
+        else if (stageNum > 5 && stageNum < 8)
+        {
+            enemyTypes = 4;
+        }
+        else
+        {
+            enemyTypes = 5;
+        }
+    }
+
+    public bool MidBossStageBool()
+    {
+        if (stageNum != 0 && stageNum % 5 == 0)
+        {
+            bossCount++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float enemyHealth, enemySpeed;
+    public float enemyHealth, enemyMaxHealth, enemySpeed;
+    public bool isBoss;
 
     public virtual void Begin()
     {
-        enemyHealth = 20.0f;
+        isBoss = false;
+        enemyMaxHealth = 20.0f;
+        enemyHealth = enemyMaxHealth;
         enemySpeed = 5.0f;
     }
 
@@ -25,5 +28,15 @@ public class EnemyBehaviour : MonoBehaviour
     public virtual void Movement()
     {
         transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+    }
+
+    public virtual void DamagedCharge()
+    {
+        //For Midboss
+    }
+
+    public virtual void DamagedChannel()
+    {
+        //For Midboss
     }
 }

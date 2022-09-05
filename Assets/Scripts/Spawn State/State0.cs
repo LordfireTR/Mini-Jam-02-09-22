@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class State0
 {
-   public abstract void EnterState();
+   public abstract void EnterState(SpawnStateManager spawnManager);
 
-   public abstract void UpdateState();
+   public abstract void UpdateState(SpawnStateManager spawnManager);
 }

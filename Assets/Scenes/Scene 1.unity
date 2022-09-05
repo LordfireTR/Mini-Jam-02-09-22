@@ -317,6 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852301297}
   - component: {fileID: 852301298}
+  - component: {fileID: 852301299}
   m_Layer: 0
   m_Name: Spawn Manager
   m_TagString: Untagged
@@ -352,9 +353,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
+  - {fileID: 387958367782035379, guid: b90731b6ba60c364face885a0ed707a8, type: 3}
+  - {fileID: 3267715583599626889, guid: 71a685742957db949bd3d3850b48b672, type: 3}
   - {fileID: 1005613233658928833, guid: 72cb8316a937ecc42a2bffae3370a711, type: 3}
+  - {fileID: 2362996671836530464, guid: 2f337e914a8385c49950a6fb34e4e996, type: 3}
+  - {fileID: 633782503816471984, guid: 1854732a32afe554186df6b6a6c80d8a, type: 3}
   xLimit: 20
   zSpawn: 16
+--- !u!114 &852301299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852301296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb6da555ab05ae47b45a2316719c6e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +570,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5810499334351682974, guid: 2ff3a5cac008bcf44aa432b3f285bddc, type: 3}
+      propertyPath: _rayDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7079020136004353414, guid: 2ff3a5cac008bcf44aa432b3f285bddc, type: 3}
       propertyPath: m_Name
       value: Player
