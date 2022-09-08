@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && gunCooldown <= 0)
         {
-            Instantiate(bullet, gunPoint.position, gunPoint.rotation);
+            Instantiate(bullet, gunPoint.position, gunPoint.rotation, gameObject.transform);
             gunCooldown = _gunCooldown;
         }
         else if(gunCooldown > 0)

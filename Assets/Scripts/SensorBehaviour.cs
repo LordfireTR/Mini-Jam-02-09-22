@@ -12,7 +12,12 @@ public class SensorBehaviour : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
+    }
+
+    void Update()
+    {
         healthSlider.value = currentHealth;
+        //Debug.Log(currentHealth);
     }
 
     void OnTriggerEnter(Collider other)
@@ -20,7 +25,6 @@ public class SensorBehaviour : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             currentHealth -= 10.0f;
-            healthSlider.value = currentHealth;
         }
     }
 }

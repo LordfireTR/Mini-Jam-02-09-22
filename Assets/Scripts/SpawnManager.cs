@@ -29,9 +29,9 @@ public class SpawnManager : MonoBehaviour
         if (spawnPeriod <= 0)
         {
             int index = Random.Range(0, enemyTypes);
-            Debug.Log(stageNum + " " + enemyTypes + " " + index);
+            //Debug.Log(stageNum + " " + enemyTypes + " " + index);
     
-            Instantiate(enemyPrefabs[index], SpawnPos(), Quaternion.Euler(0, 180, 0));
+            Instantiate(enemyPrefabs[index], SpawnPos(), Quaternion.Euler(0, 180, 0), gameObject.transform);
             spawnPeriod = _spawnPeriod;
         }
         else
@@ -110,6 +110,14 @@ public class SpawnManager : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void cheat()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            stageNum = 5;
         }
     }
 }

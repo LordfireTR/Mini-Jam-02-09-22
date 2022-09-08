@@ -21,5 +21,6 @@ public class State1 : State0
         {
             spawnManager.SwitchState(spawnManager.State2);
         }
+        SpawnManager.cheat();
     }
 }

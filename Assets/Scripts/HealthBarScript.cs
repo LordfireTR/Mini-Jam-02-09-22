@@ -15,7 +15,7 @@ public class HealthBarScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void OnTriggerEnter()
+    void Update()
     {
         healthSlider.value = EnemyBehaviour.enemyHealth;
     }
