@@ -40,15 +40,37 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy(int index)
+    public void SpawnEnemy(int index, int number)
     {
-        Instantiate(enemyPrefabs[index], SpawnPos(), Quaternion.Euler(0, 180, 0), gameObject.transform);
+        List<Vector3> filledPositions = new List<Vector3>();
+        Vector3 spawnPosition;
+
+        for (int i = 0; i < number; i++)
+        {
+            spawnPosition = BossSpawnPos();
+    
+            while (filledPositions.Contains(spawnPosition))
+            {
+                spawnPosition = BossSpawnPos();
+            }
+            
+            Instantiate(enemyPrefabs[index], spawnPosition, Quaternion.Euler(0, 180, 0), gameObject.transform);
+            filledPositions.Add(spawnPosition);
+        }
         spawnPeriod = 2*_spawnPeriod;
     }
 
     Vector3 SpawnPos()
     {
         int xSpawn = Random.Range(-xLimit, xLimit + 1);
+        Vector3 spawnPos = new Vector3(xSpawn, 1, zSpawn);
+        return spawnPos;
+    }
+
+    Vector3 BossSpawnPos()
+    {
+        int xBossLimit = xLimit/4;
+        int xSpawn = 4 * Random.Range(-xBossLimit, xBossLimit + 1);
         Vector3 spawnPos = new Vector3(xSpawn, 1, zSpawn);
         return spawnPos;
     }
@@ -104,7 +126,6 @@ public class SpawnManager : MonoBehaviour
     {
         if (stageNum != 0 && stageNum % 5 == 0)
         {
-            bossCount++;
             return true;
         }
         else
@@ -117,7 +138,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            stageNum = 5;
+            stageNum = 5 * (stageNum/5 + 1);
         }
     }
 }

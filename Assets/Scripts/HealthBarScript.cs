@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class HealthBarScript : MonoBehaviour
 {
-    [SerializeField] Slider healthSlider;
+    [SerializeField] Image healthFill;
     [SerializeField] EnemyBehaviour EnemyBehaviour;
+    float maxHealth, currentHealth;
 
     void Start()
     {
-        healthSlider.maxValue = EnemyBehaviour.enemyHealth;
-        healthSlider.value = healthSlider.maxValue;
+        maxHealth = EnemyBehaviour.enemyHealth;
+        currentHealth = maxHealth;
+        healthFill.fillAmount = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthSlider.value = EnemyBehaviour.enemyHealth;
+        currentHealth = EnemyBehaviour.enemyHealth;
+        healthFill.fillAmount = currentHealth/maxHealth;
     }
 }

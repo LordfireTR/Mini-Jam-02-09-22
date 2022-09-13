@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class SensorBehaviour : MonoBehaviour
 {
-    [SerializeField] Slider healthSlider;
-    float maxHealth = 100.0f, currentHealth;
+    [SerializeField] Image healthImage;
+    float maxHealth = 100.0f, _currentHealth;
+    public float currentHealth;
 
     void Start()
     {
-        currentHealth = maxHealth;
-        healthSlider.maxValue = maxHealth;
+        _currentHealth = maxHealth;
+        currentHealth = _currentHealth;
+        healthImage.fillAmount = 1;
     }
 
     void Update()
     {
-        healthSlider.value = currentHealth;
+        healthImage.fillAmount = _currentHealth/maxHealth;
+        currentHealth = _currentHealth;
         //Debug.Log(currentHealth);
     }
 
@@ -24,7 +27,8 @@ public class SensorBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            currentHealth -= 10.0f;
+            _currentHealth -= 10.0f;
+            Destroy(other.gameObject);
         }
     }
 }
